@@ -36,29 +36,32 @@ use Twilio\Rest\Client;
                     ]
                 );
                 $data_list[$index]=[
+                    'status'=>200,
                     'phone'=>$item,
                     'message'=>$message_data,
                      'sid'=>$message->sid,
                     'send'=>true,
-                    'error'=>'Sms delivery success'
+                    'response'=>'Sms delivery success'
                 ];
 
             }catch (EnvironmentException $e){
                 $data_list[$index]=[
+                    'status'=>400,
                     'phone'=>$item,
                     'message'=>$message_data,
                     'sid'=>null,
                     'send'=>false,
-                    'error'=>$e->getMessage()
+                    'response'=>$e->getMessage()
                 ];
             }
         }else{
             $data_list[$index]=[
+                'status'=>400,
                 'phone'=>$item,
                 'message'=>$message_data,
                 'sid'=>null,
                 'send'=>false,
-                'error'=>' please add phone as array and message  as string to request.'
+                'response'=>' please add phone as array and message  as string to request.'
             ];
         }
     }
@@ -67,7 +70,7 @@ use Twilio\Rest\Client;
 }else{
     $json = json_encode([
         'status'=>400,
-        'message'=>'parameter phone not found or is not a array'
+        'response'=>'parameter phone not found or is not a array'
     ]);
     exit($json);
 }

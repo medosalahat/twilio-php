@@ -25,7 +25,7 @@ use Twilio\Rest\Client;
     $client = new Client($sid, $token);
     foreach ($_POST['phone'] as $index=>$item) {
 
-        if( (is_array($item) and !empty($item)) and !empty($message_data)){
+        if( (!empty($item)) and !empty($message_data)){
             try{
                 $message = $client->messages->create(
                    // '+962798981496', // Text this number
